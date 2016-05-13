@@ -385,6 +385,10 @@ var myModule = (function (a, b) {
 				sum = countChar(arrString, arr[i]);
 				console.log(arr[i] + ' - ' + sum);
 			}
+			for (var i = 0; i < arrString.length; i++) {
+				countArr['Symbol ' + arrString.charAt(i)] = countChar(arrString, arrString.charAt(i));
+			}
+			console.log(countArr);
 			/*Пробуем сделать задачу через ассоциированный массив*/
 			/*var arrObj = {char:'', count:0};*/
 			/*function newObj (a) {
