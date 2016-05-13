@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" /> 
+</head>
+<body>
+	<script type="text/javascript">
+var myModule = (function (a, b) {
+
+	var a = 5;
+
+	return {
+		task1 : function () {
+			console.log ('Задача №1');
+			for (var i = 10; i < 20; i++) {
+				console.log(i * i);
+			}	
+		},
+		task2 : function () {
+			console.log ('Задача №2');
+			var n = prompt('Введіть число для задачі №2', '');
+			var sum = 0;
+			for (var i = 1; i <= n; i++) {
+				sum += i;
+			}
+			console.log ('Сума чисел від 1 до ' + n + ' = ' + sum);
+		},
+		task3 : function () {
+			console.log ('Задача №3');
+			var n = prompt('Введіть число для задачі №3', '');
+			var set = 1;
+			for ( i = 1; i <= n; i++) {
+				set = set * i;
+			}
+			console.log ('Добуток чисел від 1 до ' + set + ' = ' + set);
+		},
+		task4 : function () {
+			console.log ('Задача №4');
+			var nNull = 0, nPlus = 0, nMinus = 0;
+			var n = prompt('Введіть кількість цифр для задачі №4', '');
+			for (var i = 1; i <= n; i++) {
+				var m = prompt('Число' + i, '');
+				if (m == 0 ) {
+					nNull++;
+				} else if (m > 0) {
+					nPlus++;
+				} else {
+					nMinus++;
+				}		
+			}
+			console.log ("Кількість від'ємних чисел " + nMinus);
+			console.log ("Кількість додатніх чисел " + nPlus);
+			console.log ("Кількість нулів " + nNull);
+		},
+		task5 : function () {
+			console.log ('Задача №5');
+			var n = 1, m =1;
+			n = parseInt (prompt('Введіть число', ''));
+			m = parseInt (prompt('Введіть в яку міру перевести (від 1 - 9)', ''));
+			switch (m) {
+				case 1: console.log (n + 'саженей в метры(1 сажень равна 2,1366 м) ' + (n * 2.1366)); break;
+				case 2: console.log (n + 'из дюймов в сантиметры(1 дюйм равен 2,5 см) ' + (n * 2.5)); break;
+				case 3: console.log (n + 'футов в метры(1 фут равен 0,3048 м) ' + (n * 0.3048)); break;
+				case 4: console.log (n + 'драхм в граммы(1 драхма равна 3,7325 г) ' + (n * 3.7325)); break;
+				case 5: console.log (n + 'унций в граммы(1 унция равна 29,86 г) ' + (n * 29.86)); break;
+				case 6: console.log (n + 'фунтов в килограммы(1 фунт равен 0,40951 кг) ' + (n * 0.40951)); break;
+				case 7: console.log (n + 'аршинов в метры(1 аршин равен 0,7112 м) ' + (n * 0.7112)); break;
+				case 8: console.log (n + 'золотников в граммы(1 золотник равен 4,2657 г) ' + (n * 4.2657)); break;
+				case 9: console.log (n + 'дюймов в миллиметры(1 дюйм равен 25,3995 мм) ' + (n * 25.3995)); break;
+			}
+		},
+		task6 : function () {
+			console.log ('Задача №6 - Сума вкладу');
+			var n = parseInt (prompt('Введіть суму вкладу', ''));
+			var m = parseInt (prompt('Введіть на скільки років робиться вклад', ''));			
+			for (var i = 1; i <= m; i++) {
+				n = n + (n * 0.03);
+			}
+			console.log ('Через ' + m + ' років, сума вкладу становитиме: ' + n);
+		},
+		task7 : function () {
+			console.log ('Задача №7');
+			for (var i = 1; i <= 10; i++) {
+				var n = parseInt (prompt('Введіть перше число', ''));
+				var m = parseInt (prompt('Введіть друге число', ''));
+				if (n > m) 	{
+					console.log ('З ' + i + ' пари більше число: ' + n)
+				}
+				else {
+					console.log ('З ' + i + ' пари більше число: ' + m)
+				}
+			}
+		},
+		task8 : function () {
+			console.log ('Задача №8');
+			for (var i = 20; i <= 50; i++) {
+				if ((i % 3 == 0) && (i % 5 !== 0)) {
+					console.log ('Делятся на 3 но не делятся на 5: ' + i);
+				}
+			}
+		},
+		task9 : function () {
+			console.log ('Задача №9');					
+			for (var i = 35; i <= 87; i++) {
+				if (i % 7 == 1 || i % 7 == 2 || i % 7 == 5) {
+					console.log ("alert" + (i % 7));
+				}
+			}
+		},
+		task10 : function () {
+			console.log ('Задача №10');
+			var sum = 0;
+			for (var i = 1; i <= 50; i++) {
+				if (((i % 5) == 0) && ((i % 7) == 0)) {
+					sum = sum + i;
+				}
+			}
+		},
+		task11 : function () {
+			console.log ('Задача №11');
+			for (var i = 10; i <= 99; i++) {
+				if ((i % 4) == 0 && (i % 6) !== 0) {
+					console.log ('Делятся на 4 но не делятся на 6: ' + i);
+				}
+			}
+		},
+		task12 : function () {
+			console.log ('Задача №12');
+			var set = 1;
+			for (var i = 10; i <= 99; i++) {
+				if (i % 13 == 0) {
+					set = set * i;
+				}
+			}
+			console.log ('Произведение двухзначных чисел которые делятся нацело на 13: ' + set);
+		},
+		task13 : function () {
+			console.log ('Задача №13');
+			var sum = 0;
+			for (var i = 100; i <= 200; i++) {
+				if (i % 17 == 0) {
+					sum += i;
+				}
+			}
+			console.log ('Сума чисел от 100 до 200 которые нацело делятся на 17: ' + sum);
+		},
+		task14 : function () {
+			console.log ('Задача №14');
+			var sum = 0;
+			var n = parseInt (prompt('Введіть ціле число', ''));
+			for (var i = 1; i <= n; i++) {
+				sum += i * i;
+			}
+			console.log ('Сума квадратов чисел от 1 до ' + n +': ' + sum);
+		},
+		task15 : function () {
+			console.log ('Задача №15');
+			var n = parseFloat(prompt('Введіть число', ''));
+			var m = parseInt (prompt('Введіть степінь числа', ''));
+			var set = n;
+			for (var i = 1; i <= m; i ++) {
+				if (n % 1 === 0 && m < 0) {							
+					break;
+				}
+				set = set * n;
+			}
+			if (n % 1 === 0 && m < 0) {
+				console.log (set);
+			} else {
+				console.log ('Умова не виконана');
+			}					
+		},
+		task16 : function () {
+			console.log ('Задача №16');
+			var n = parseInt(prompt('Введіть число сіно-косилок', ''));
+			var m = parseInt (prompt('Введіть скільки годин вони працювали', ''));
+			for (var i = 0; i < n; i++) {
+				m += 10/60;
+			}
+			console.log ('Бригада працювала:' + m + ' годин');
+		},
+		task17 : function () {
+			console.log ('Задача №17');
+			var n = parseInt(prompt('Введите количество учеников', ''));			
+			var sum = 0;
+			for (var i = 1; i <= n; i++) {
+				var m = parseInt (prompt('Введите рост ' + i + 'го ученика', ''));
+				sum += m;
+			}
+			console.log('Средний рост учеников: ' + (sum / n));
+		},
+		task18 : function () {
+			console.log ('Задача №18');
+			var n = parseInt(prompt('Введите натуральное число', ''));
+			var sum = 0;
+			for (var i = 1; i < n; i++) {
+				if ((i % 2 != 0) && (i % 3 != 0) && (i % 5 != 0)) {
+					console.log(i);
+					sum++;
+				}
+			}
+			console.log('Количество натруральных чисел которые не делятся на 2, 3, 5: ' + sum);
+		},
+		task19 : function () {
+			console.log ('Задача №19');		
+			var a = '';
+			for (var i = 10; i <= 99; i++) {
+				for (var j = 10; j <=99; j++){
+					a = '' + i + j;								
+					if ((parseInt(a) % (i * j) == 0)){
+						console.log ('Первое число: ' + i + ' Второе число: ' +j);
+					};			
+				}
+			}			
+		},
+		task20 : function () {
+			console.log ('Задача №20');
+			var a,b = '';
+			for (var i = 10; i <= 99; i++) {
+				for (var j = 10; j <=99; j++){
+					a = '' + i + j;								
+					b = '' + j + i;								
+					if ((parseInt(a) % 99 == 0) && (parseInt(b) % 49 == 0)){
+						console.log ('Первое число: ' + a + ' Второе число: ' +b);
+					};			
+				}
+			}			
+		},
+		task21 : function () {
+			console.log ('Задача №21');
+			var n = parseInt(prompt('Введите натуральное число', ''));
+			var sum = 0;
+			for (var i = 1; i <= n; i++) {
+				sum += 1 / ((2 * i) * (2 * i));				
+			}
+			console.log (sum);
+		},
+		task22 : function () {
+			console.log ('Задача №22');
+			var n = parseInt(prompt('Введите натуральное число', ''));
+			var sum = 0;
+			for (var i = 1; i <= n; i++) {
+				sum += 1 / i;				
+			}
+			console.log (sum);
+		},
+		task23 : function () {
+			console.log ('Задача №23');
+			var sum = 1;
+			var n;
+			for (var i = 1; i <= 10; i++) {
+				n = 1;
+				for (var j = 0; j < i; j++) {
+					n = n * 2;					
+				}
+				sum += n;
+			}
+			console.log ('Сума равна: ' + sum);
+		},
+		task24 : function () {
+			console.log ('Задача №24');
+			var set = 1;			
+			var sum = 0;
+			for (var i = 1; i <= 10; i++) {
+				for (var n = 1; n <= i; n++) {
+					sum = sum + n;					
+				}
+				set = set * sum;
+				sum = 0;				
+			}
+			console.log ('Результат равен: ' + set);
+		},
+		task25 : function () {
+			console.log ('Задача №25');
+			var a = parseFloat(prompt('Введите действительное число', ''));
+			var n = parseInt(prompt('Введите натральное число', ''));
+			var set = 1;
+			for (var i = 1; i <= n; i++) {				
+				set = set * (a + i - 1) ;
+			}
+			console.log('Результат равен: ' + set);
+		},
+		task26 : function () {
+			console.log ('Задача №26');
+			var x = parseFloat(prompt('Введите действительное число', ''));
+			var n = parseInt(prompt('Введите натральное число', ''));
+			var sum = 0;
+			for (var i = 1; i <= n; i++) {				
+				sum += Math.sin(x);
+				x = x * x;								
+			}
+			console.log('Результат равен: ' + sum);
+		},
+		task27 : function () {
+			console.log ('Задача №27');
+			var m = parseInt(prompt('Введите сколько денег было изначально', ''));
+			var k = parseInt(prompt('Введите сколько стоит мороженое', ''));
+			var i = 0;
+			while (m > 0) {
+				if ((m - k) < 0) {
+					break;
+				}
+				m = m - k;
+				i++;
+			}
+			console.log('Первокласник сьел - ' + i + ' морожен, у него осталось: ' + m + ' руб.');
+		},
+		task28 : function () {
+			console.log ('Задача №28');			
+			var m = parseInt(prompt('Введите размер ссуды', ''));
+			var s = parseInt(prompt('Введите порог долга', ''));
+			var i = 0;
+			while (m < s) {
+				if ((m + m * 0.2) > s) {
+					break;
+				}
+				m += m * 0.2;
+				i++;				
+			}
+			console.log('Долг будет превышен через ' + i + ' лет');			
+		},
+		task29 : function () {
+			console.log ('Задача №29');						
+			var m = 2;			
+			while (m <= 100) {				
+				if (m % 2 == 0) {
+					console.log(m);
+				}
+				m++;				
+			}			
+		},
+		task30 : function () {
+			console.log ('Задача №30');
+			var sum = 0;
+			var m = 1;			
+			while (m <= 99) {				
+				if (m % 2 !== 0) {
+					sum += m;
+					console.log(m);
+				}
+				m++;				
+			}			
+			console.log('Сума нечетных цифр в диапазоне от 1 до 99 равна: ' + sum);
+		},
+		task31 : function () {
+			console.log ('Задача №31');
+			var m = parseInt(prompt('Введите длинну материала', ''));
+			var k = parseInt(prompt('Введите размер отрезаемого куска материи', ''));
+			var i = 0;
+			while (m > 0) {
+				if ((m - k) < 0) {
+					break;
+				}
+				m = m - k;
+				i++;
+			}
+			console.log('Было отрезано: ' + i + ' кусков материи, остача составляет: ' + m + ' м.');
+		},
+		phpTask1 : function () {
+			console.log ('Задача PHP №1');
+			var arr = [1954, 1900, 240, 246, 1488, 1802];
+			for (var i = 0; i < arr.length; i++) {
+				if (((arr[i] % 4 ==0) && (arr[i] % 100 !== 0) ) || (arr[i] % 400 ==0)) {
+					console.log(arr[i] + 'рік є високосним');
+				}
+			}
+		},
+		phpTask2 : function () {
+			console.log ('Задача PHP №2');			
+			var sum = 0;
+			var arr = ['a', 'b'];
+			var arrString = 'This piqued me, so, loading the express with solid ball, I waited till my friend walked some ten yards out from his force, in order to get a better view of our position, accompanied only by an orderly; then, lying down and resting the express on a rock, I covered him. The rifle, like all expresses, was only sighted to three hundred and fifty yards, so to allow for the drop in trajectory I took him half-way down the neck, which ought, I calculated, to find him in the chest. He stood quite still and gave me every opportunity, but whether it was the excitement or the wind, or the fact of the man being a long shot, I don"t know, but this was what happened. Getting dead on, as I thought, a fine sight, I pressed, and when the puff of smoke had cleared away, to my disgust, I saw my man standing there unharmed, whilst his orderly, who was at least three paces to the left, was stretched upon the ground apparently dead. Turning swiftly, the officer I had aimed at began to run towards his men in evident alarm.';
+			
+			function countChar(str, a) {
+				var sum = 0;
+				for (var i = 0; i < str.length; i++) {
+					if (str.charAt(i) == a) {
+						sum++;
+					}
+				}
+				return sum;
+			}
+			for (var i = 0; i < arr.length; i++) {
+				sum = countChar(arrString, arr[i]);
+				console.log(arr[i] + ' - ' + sum);
+			}
+			/*Пробуем сделать задачу через ассоциированный массив*/
+			var arrObj = {char:'', count:0};
+			/*function newObj (a) {
+				this.arrChar = a;
+				this.charCount = 0;
+			}*/
+			var newArr = [];			
+			for (var i = 0; i < arrString.length; i++) {
+				var n = 0;
+				var s = arrString.charAt(i), 
+				if (i == 0) {
+					newArr[0] = {
+						charObj: arrString.charAt(i), 
+						id: 0
+					};
+				}				
+			}
+			console.log(newArr[0].char);
+
+		},
+		phpTask3 : function () {
+			console.log ('Задача PHP №3');
+			var arrA = ['a', 'cold', 'water', 'McClane'];
+			var arrB = [1, 1.25, 33., 7];
+			var arrC = ['a', '5', 22.5, 'good', true];
+			function arrSort(arr) {
+				var n = arr.length;
+    			for (var i = 0; i < n-1; i++){ 
+    				for (var j = 0; j < n-1-i; j++){ 
+    					if (arr[j+1] < arr[j]){ 
+    						var t = arr[j+1]; 
+    						arr[j+1] = arr[j]; 
+    						arr[j] = t; 
+    					}
+        			}
+     			}                     
+    			return arr;
+			}
+			var sortedArrA = arrSort(arrA);
+			var sortedArrB = arrSort(arrB);
+			var sortedArrC = arrSort(arrC);
+			console.log(sortedArrA);
+			console.log(sortedArrB);
+			console.log(sortedArrC);
+		},
+		phpTask4 : function () {
+			console.log ('Задача PHP №4');
+			var arrA = [-7, 0, 11, 5, -4, -4, 0, 12, -8];
+			var arrB = [];
+			for (var i = 0; i < arrA.length; i++) {
+				if (arrA[i] < 0) {
+					arrB.push(arrA[i], 'NULL');
+				} else {
+					arrB.push(arrA[i]);
+				}
+			}
+			console.log(arrA);
+			console.log(arrB);
+		},
+		phpTask5 : function () {
+			console.log ('Задача PHP №5');
+			var n = 0;
+			for (var i = 1112; i < 2015; i++) {
+				if (((i % 4 ==0) && (i % 100 !== 0) ) || (i % 400 ==0)) {
+					n++;
+				}
+			}
+			console.log('Починаючи з 1112 року, людство проживало ' + n + ' разів 29 лютого');			
+		},
+		phpTask6 : function () {
+			console.log ('Задача PHP №6');
+			var n = 365 * 24 * 3600;
+			var i = 0;
+			var color = 1;
+			while (i < n) {
+				if (color > 2) {
+					color = 1;
+				}
+				i += 40;
+				color += 1;
+			} 
+			color = color - 1;
+			switch (color) {
+				case 1 : 
+					console.log ('Красный'); 
+					break;
+				case 2 : 
+					console.log ('Зеленый'); 
+					break;				
+			}
+		},
+		phpTask7 : function () {
+			console.log ('Задача PHP №7');
+			var arr = [5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4]; //Масив оценок
+			var sum = 0;
+			for (var i = 0; i < arr.length; i++) {				
+				sum += arr[i];
+			}
+			console.log('Середній бал становить: ' + (sum / arr.length));
+		},
+		phpTask8 : function () {
+			console.log ('Задача PHP №8');
+			var arrA = [];
+			var rand = 0, sign = 0, negativeNum = 0, positiveNum = 0, nullNum = 0, num = 0;
+			function getRandom (sign) {
+				if (sign > 0.5) {
+					return (Math.random() * 100);
+				} else {
+
+				} return (Math.random() * 100 * -1);
+			}
+			for (var i = 0; i < 100; i++) {
+				sign = Math.random();
+				num = getRandom(sign)
+				arrA.push(num);
+				if (num > 0) {
+					positiveNum++;
+				} else if (num = 0) {
+					nullNum++;
+				} else {
+					negativeNum++;
+				}
+			}
+			console.log('Від"ємних чисел: ' + negativeNum + ' додатніх: ' + positiveNum + ' нулів: ' + nullNum);
+		},
+		phpTask9 : function () {
+			console.log ('Задача PHP №9');			
+			var arr = [1, 0, '0', 33, 'hello', true, false, 'bye', 20., 0.35, 'ZR', 'a'];
+			var arrNumber = [], arrBoolean = [], arrString = [];
+			for (var i = 0; i < arr.length; i++) {
+				if (typeof arr[i] == "number") {
+					arrNumber.push(arr[i]);
+				} else if (typeof arr[i] == "boolean") {
+					arrBoolean.push(arr[i]);
+				} else {
+					arrString.push(arr[i]);
+				}
+			}
+			console.log(arrNumber);
+			console.log(arrBoolean);
+			console.log(arrString);
+		},
+		phpTask10 : function () {
+			console.log ('Задача PHP №10');
+			var clan = 16;
+			for (var i = 1721; i <= 2015; i++) {
+				if (i % 5 == 0) {
+					clan += 5;
+				} else if (i % 3 == 0) {
+					clan += 4;
+				} else if (i % 2 == 0) {
+					clan += 3;
+				} else {
+					clan += 1;
+				}
+			}
+			console.log('Кількість людей у роді на даний час становить: ' + clan);
+		}
+
+		/*phpTask7 : function () {
+			console.log ('Задача PHP №');			
+		}
+*/
+	};
+
+}) ();
+
+
+
+
+
+
+
+
+	</script>
+	
+</body>
+</html>
