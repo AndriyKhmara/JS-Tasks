@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<div class="container center">
+		<h1>Данні про погоду</h1>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+				<h3>Загальна статистика</h3>
+				<a class="clickGS">
+					<div class="lineText">
+						<p>Розгорнути</p>
+					</div>
+				</a>
+				<div class="foundText">					
+					<p class="totalStatistic"></p>
+					<table class="statisticTable"></table>					
+				</div>
+				<h3>Пошук по максимальним значенням</h3>	
+				<select id="selectParam">
+					<option value="-">Вибіріть необхідний параметр</option>
+					<option value="maxTemp">
+						Пошук по максимальному значенню температури
+					</option>
+					<option value="maxHum">
+						Пошук по максимальному значенню вологості
+					</option>
+					<option value="maxWF">
+						Пошук по максимальній силі вітру
+					</option>
+				</select>
+				<button onclick="search()">Пошук</button>
+				<div class="foundText">					
+					<p class="maxParameter"></p>					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function randomTemp(){
+			var random = Math.random();
+			if (random < 0.02) {
+				return -1;
+			} else if (random < 0.07) {
+				return 0;
+			} else if (random < 0.2) {
+				return (random * 100);
+			} else if (random < 0.7)  {
+				return (random * 100 / 2);
+			} else {
+				return 24;
+			} 
+		}
+		function windForce(){
+			var random = Math.random();
+			if (random < 0.02) {
+				return 25;
+			} else if (random < 0.07) {
+				return 10;
+			} else if (random < 0.2) {
+				return 8;
+			} else if (random < 0.7)  {
+				return 13;
+			} else {
+				return 5;
+			} 
+		}
+		function randomHum(){
+			var random = Math.random();
+			if (random < 0.02) {
+				return 30;
+			} else if (random < 0.07) {
+				return 40;
+			} else if (random < 0.2) {
+				return 60;
+			} else if (random < 0.7)  {
+				return 80;
+			} else {
+				return 100;
+			} 
+		}
+		function randomWind(){
+			var random = Math.random();
+			if (random < 0.02) {
+				return "SW";
+			} else if (random < 0.07) {
+				return "N";
+			} else if (random < 0.2) {
+				return "NW";
+			} else if (random < 0.7)  {
+				return "W";
+			} else {
+				return "S";
+			} 
+		}
+
+
+		var citiesArr = ["Rivne", "Lviv", "Kiev", "Odesa"];
+		var dataArr = [];
+		
+		for (var k = 0; k < citiesArr.length; k++) {
+			for (var i = 1; i <= 30; i++) {
+				
+				dataArr.push({
+					city: citiesArr[k],
+					day: i,
+					humidity:randomHum(),
+					temperature: randomTemp().toFixed(2),
+					directionOfTheWind: randomWind(),
+					windForce: windForce()
+				});					
+			}
+		}	
+		console.log(dataArr);
+		function globalStatistic(){
+			var statiscitArr = [];
+			var gS = "<tr>" + "<td>" + "<b>Місто</b>" + "</td>" + "<td>" + "<b>Середня температура</b>" + "</td>"+ "<td>" + "<b>Середня вологість</b>" + "</td>"+ "<td>" + "<b>Середня сила вітру</b>" + "</td>" + "</tr>";	
+			var pS = "";
+			var totalAvgTemp = 0, totalAvgHum = 0, totalAvgWF = 0, totalCount = 0;
+			for (var i = 0; i < citiesArr.length; i++) {
+				var avgTemp = 0, avgHum = 0, avgWF = 0, count = 0;	
+				for (var j = 0; j < dataArr.length; j++) {
+					if (citiesArr[i] == dataArr[j].city) {						
+						avgTemp += parseInt(dataArr[j].temperature);
+						avgHum 	+= parseInt(dataArr[j].humidity);
+						avgWF	+= parseInt(dataArr[j].windForce);
+						count++;
+						totalCount++;
+					}
+				}
+				totalAvgTemp += avgTemp;
+				totalAvgHum  += avgHum;
+				totalAvgWF   += avgWF;
+				avgTemp = 	(avgTemp / count).toFixed(2);
+				avgHum  = 	(avgHum  / count).toFixed(2);
+				avgWF   = 	(avgWF   / count).toFixed(2);
+				statiscitArr.push({
+						city: 		citiesArr[i],
+						avgTemp: 	avgTemp,
+						avgHum:  	avgHum,
+						avgWF: 		avgWF
+				});	
+			}
+			totalAvgTemp = (totalAvgTemp / totalCount).toFixed(2);
+			totalAvgHum  = (totalAvgHum  / totalCount).toFixed(2);
+			totalAvgWF   = (totalAvgWF	 / totalCount).toFixed(2);
+			
+			for (var i = 0; i < statiscitArr.length; i++) {
+				gS += "<tr>" + "<td>" + statiscitArr[i].city + "</td>" + "<td>" +  statiscitArr[i].avgTemp + "</td>" + "<td>" + statiscitArr[i].avgHum +"</td>" + "<td>" + statiscitArr[i].avgWF + "</td>" + "</tr>";
+			}			
+			pS = "<b>Загальна статистика:</b><ul><li>Середня температура: " + totalAvgTemp +"C</li><li>Середня вологість: " + totalAvgHum +"</li><li>Середня сила вітру: " + totalAvgWF +"</li></ul>";
+			$("table.statisticTable").html(gS);
+			$("p.totalStatistic").html(pS);
+		}
+		function serachParam(param){
+			var paramArr = [];
+			for (var i = 0; i < dataArr.length; i++) {
+				if (param == "maxTemp") {
+					paramArr.push({
+						day: dataArr[i].day,
+						city: dataArr[i].city,
+						temp:dataArr[i].temperature
+					});
+				} else if (param == "maxHum") {
+					paramArr.push({
+						day: dataArr[i].day,
+						city: dataArr[i].city,
+						hum:dataArr[i].temperature
+					});
+				} else if (param == "maxWF") {
+					paramArr.push({
+						day: dataArr[i].day,
+						city: dataArr[i].city,
+						wF:dataArr[i].temperature
+					});
+				}
+			}	
+			var maxParam = 0, searchDay = 0, searchCity = "";		
+			for (var i = 0; i < paramArr.length; i++) {				
+				if (param == "maxTemp") {
+					if (i != (paramArr.length - 1) && paramArr[i].temp > paramArr[i + 1].temp) {
+						maxParam   = paramArr[i].temp;	
+						searchDay  = paramArr[i].day;
+						searchCity = paramArr[i].city;
+					}
+				} else if (param == "maxHum") {
+					if (i != (paramArr.length - 1) && paramArr[i].hum > paramArr[i + 1].hum) {
+						maxParam   = paramArr[i].hum;	
+						searchDay  = paramArr[i].day;
+						searchCity = paramArr[i].city;
+					}
+				} else if (param == "maxWF") {
+					if (i != (paramArr.length - 1) && paramArr[i].wF > paramArr[i + 1].wF) {
+						maxParam   = paramArr[i].wF;	
+						searchDay  = paramArr[i].day;
+						searchCity = paramArr[i].city;
+					}
+				}
+			}
+			return ({
+				maxParam: 	maxParam,
+				day: 		searchDay,
+				city: 		searchCity
+			});
+		}
+		function search(){
+			var param = $("#selectParam").val();
+			var searchArr = serachParam(param);
+			if (param == "maxTemp") {
+				var sP = "Максимальне значення температури зафіксоване у місті " + searchArr.city + " " + searchArr.day + " числа і становить: " + searchArr.maxParam + "C";
+			} else if (param == "maxHum") {
+				var sP = "Максимальне значення вологості зафіксоване у місті " + searchArr.city + " " + searchArr.day + " числа і становить: " + searchArr.maxParam;
+			}  else if (param == "maxWF") {
+				var sP = "Максимальна сила вітру зафіксована у місті " + searchArr.city + " " + searchArr.day + " числа і становить: " + searchArr.maxParam;
+			}			
+			$("p.maxParameter").html(sP);
+		}
+		$(document).ready(function() {
+			$("table.statisticTable").hide();			
+			$("p.totalStatistic").hide();	
+			$("a.clickGS").click(function(){
+				globalStatistic();
+				$(this).parent().find("table.statisticTable").slideToggle();
+				$(this).parent().find("p.totalStatistic").slideToggle();
+			});
+		});
+			
+	</script>
+</body>
+</html>

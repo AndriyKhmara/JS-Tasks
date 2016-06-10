@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<title>JS Task 1</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+				<h1>Всемирный институт им. Лабутяна</h1>
+				<h2>
+					Поиск по имени студента
+				</h2>	
+				<p>Введите имя:</p>
+				<input type="text" id="studentName"/>					
+				<br/>
+				<a class="clickFN">
+					<div class="lineText">
+						<p>Показать результат</p>
+					</div>
+				</a>
+				<div class="foundText">
+					<table class="foundTable"></table>
+				</div>
+				
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+				<h2>Список студентов</h2>
+				<a class="click">
+					<div class="lineText">
+						<p>Развернуть</p>
+					</div>
+				</a>
+				<div class="foundText">					
+					<table class="foundStudentsTable"></table>
+				</div>		
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
+				<h2>Статистика</h2>
+				<a class="clickS">
+					<div class="lineText">
+						<p>Развернуть</p>
+					</div>
+				</a>
+				<div class="foundText">					
+					<div class="groupStatistic">						
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+
+	<!--********************************************************************************-->
+	<!--********************************************************************************-->
+	<!--********************************************************************************-->
+	<script type="text/javascript">
+		var studentsArr = ['Andriy', 'Oleksandr', 'Vasya', 'Petro', 'Margarita', 'Luda', 'Nastya', 'Vera', 'Oksana', 'Vova'];
+		var subjectArr = ['Mathematics', 'Philosophy', 'Ukraine language', 'Physical Culture', 'Physics'];
+		var dataArr = [], newStudentsNames = [];
+		//Рандомизатор оценок
+		function randomRating (){
+			var random = Math.random();
+			if (random < 0.02) {
+				return "Пропуск";
+			} else if (random < 0.07) {
+				return 2;
+			} else if (random < 0.2) {
+				return 3;
+			} else if (random < 0.7)  {
+				return 4;
+			} else {
+				return 5;
+			} 
+		}
+		//Заполняем масив данными
+		for (var i = 1; i <= 3; i++ ){ 							//количество груп
+			for (var j = 0; j < 10; j++){						//количество студентов
+				var studentName = studentsArr[j] + "_" + i;
+				newStudentsNames.push(studentName);
+				for (var k = 0; k < subjectArr.length; k++) {	//количество предметов
+					for (var l = 0; l < 10; l++) {				//количество оценок
+						dataArr.push({
+							name: studentName,
+							group: i,
+							subject: subjectArr[k],
+							rating: randomRating()
+						});				
+					}
+				}
+			}				
+		}
+		var myStudents = (function () {
+			var searchByStudentName = function(name) {
+				var foundNames = [];
+				for (var i = 0; i < dataArr.length; i++) {
+					if (name == dataArr[i].name) {						
+						foundNames.push(dataArr[i]);
+					} 
+				}
+				return foundNames;
+			}
+			return {
+				searchByStudentName : searchByStudentName
+			}
+		}) ();	
+		function search (){
+			var studentName = $("#studentName").val();
+			var foundConcat = [];			
+			var t = "<tr>" + "<td>" + "<b>Имя студента</b>" + "</td>" + "<td>" + "<b>Номер группы</b>" + "</td>"+ "<td>" + "<b>Название предмета</b>" + "</td>"+ "<td>" + "<b>Оценка</b>" + "</td>" + "</tr>";
+			foundConcat = myStudents.searchByStudentName(studentName);
+
+			for (var i = 0; i < foundConcat.length; i++) {					
+					t += "<tr>" + "<td>" + foundConcat[i].name + "</td>" + "<td>" +  foundConcat[i].group + "</td>" + "<td>" + foundConcat[i].subject +"</td>" + "<td>" + foundConcat[i].rating + "</td>" + "</tr>";	
+				}			
+			$("table.foundTable").html(t);		
+		}
+		function searchStudents (){
+			var studensList = [];
+			var sL = "<tr>" + "<td>" + "<b>Имя студента</b>" + "</td>" + "<td>" + "<b>Номер группы</b>" + "</td>" + "</tr>";			
+			for (var i = 0; i < newStudentsNames.length; i++) {
+				for (var j = 0; j < dataArr.length; j++) {
+					if (newStudentsNames[i] == dataArr[j].name) {
+						studensList.push({
+											name: 	dataArr[j].name,
+											group: 	dataArr[j].group});			
+						break;			
+					}
+				}				
+			}
+			/*Неудачная попытка удалить дублирующиеся записи
+			var len = studensList.length;
+			for (var i = 0; i < len; i++) {
+				for (var j = 0; j < len; j++) {
+					if (i != j && studensList[i].name == studensList[j].name) {
+						studensList.splice(j, 1);
+						len = len - 1;
+					}
+				}
+			}
+			*/
+			console.log(studensList.length);
+			for (var i = 0; i < studensList.length; i++) {
+					sL += "<tr>" + "<td>" + studensList[i].name + "</td>" + "<td>" +  studensList[i].group + "</td>" + "</tr>";	
+			}
+			$("table.foundStudentsTable").html(sL);		
+		}
+		function globalStatistic(){
+			var countStudents = newStudentsNames.length;
+			var sum = 0;
+			var count = 0;
+			var gS = "<h3>" + "Общая статистика" + "</h3>";
+
+			for (var i = 0; i < dataArr.length; i++) {
+				if (dataArr[i].rating != "Пропуск") {
+					sum += dataArr[i].rating;
+					count += 1;
+				}
+				
+			}
+			sum = (sum / count).toFixed(2); //Середній бал по всім групам
+			gS += "<p>" + "<b>Количество студентов: </b>" + countStudents + " <b>средний бал составляет: </b>" + sum + "</p>"
+			gS += "<div class='row'>";
+			for (var j = 1; j <= 3; j++) {
+				gS += "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><table class='statisticTable'><tr><td>Номер группы</td><td>Средний бал</td><td>Количество пропусков</td></tr>";
+				count = 0;
+				sum = 0;
+				var sumOuts = 0, countRating = 0;
+				for (var i = 0; i < dataArr.length; i++) {				
+					if (dataArr[i].group == j) {						
+						if (dataArr[i].rating != "Пропуск"){
+							sum += dataArr[i].rating;
+							countRating++;
+						} else {
+							sumOuts++;
+						}				
+						
+					}										
+				}					
+				sum = (sum / countRating).toFixed(2);
+				gS += "<tr><td>" + j + "</td><td>" + sum + "</td><td>" + sumOuts + "</td></tr></table></div>";		
+			}
+			gS += "</div>";
+
+			$("div.groupStatistic").html(gS);		
+		}
+		$(document).ready(function() {
+			$("table.foundStudentsTable").hide();			
+			$("a.click").click(function(){
+				searchStudents();
+				$(this).parent().find("table.foundStudentsTable").slideToggle();
+			});
+		});
+		$(document).ready(function() {
+			$("table.foundTable").hide();			
+			$("a.clickFN").click(function(){
+				search();
+				$(this).parent().find("table.foundTable").slideToggle();
+			});
+		});
+		$(document).ready(function() {
+			$("div.groupStatistic").hide();			
+			$("a.clickS").click(function(){
+				globalStatistic();
+				$(this).parent().find("div.groupStatistic").slideToggle();
+			});
+		});
+	</script>
+</body>
+</html>

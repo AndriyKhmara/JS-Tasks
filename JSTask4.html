@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<script type="text/javascript">
+    var myTasks = (function () {
+        return {
+            //# task 1 - Write a JavaScript function to check whether an `input` is an array or not.
+
+            is_array: function (string){
+                var isCorrect = false;
+                if ((typeof string) == 'string') {
+                    isCorrect = true;
+                    console.log(isCorrect);
+                } else {
+                    console.log(isCorrect);
+                }
+            },
+            //# task 2 - Write a JavaScript function to clone an array.
+
+            array_Clone: function (array) {
+                var firstArrLength = array.length % 2;
+                var newArr = [], secondArr = [];
+                for (var i = 0; i < firstArrLength; i++) {
+                    newArr.push (array[i]);
+                }
+                for (var i = firstArrLength; i < array.length; i++) {
+                    secondArr.push(array[i]);
+                }
+                newArr.push(secondArr);
+                return newArr;
+            },
+            //# task 3 - Write a JavaScript function to get the first element of an array. 
+            first: function (array, num) {                        
+                var arr1 = array;
+                var newArr = [];
+                if (num < 0) {
+                    return newArr;
+                } else if (num > array.length) {
+                    return array;
+                } else {
+                    for (var i = 0; i < num; i++) {
+                        newArr.push(array[i]);
+                    }
+                    return newArr;
+                }
+            },
+            //# task 4 - Write a JavaScript function to get the last element of an array.
+            last: function (number) {
+                var n = number;
+                var arr1 = [7, 9, 0, -2];
+                var newArr = [], result = [];
+                var arrLen = arr1.length - 1;
+                if (n == 0) {
+                    console.log(arr1[arr1.length - 1]);
+                    return arr1[arr1.length - 1];
+                } else if (n < arr1.length) {
+                    for (var i = arrLen; i > arrLen - n; i--) {
+                        newArr.push(arr1[i]);
+                    }
+                    result = newArr;
+                    console.log(newArr.reverse());
+                    return result;
+                } else {
+                    console.log(arr1);
+                    return arr1;
+                }
+            },
+            testTask4: function (){                        
+                console.log("Testing with n = 3: ");
+                var arr = myTasks.last(3);
+                var needArr = [9, 0, -2];
+                console.log(needArr);
+                if (arr.length == needArr.length) {
+                    var s = 0;
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] == needArr[i]) {
+                            s++;
+                        } 
+                    }
+                    if (s == arr.length) {
+                        console.log("Arrays coincide");
+                    }
+                } else {
+                    console.log("Arrays do not coincide");
+                }
+            },
+            //# task 5 - Write a simple JavaScript program to join all elements of the following array into a string.
+
+            myColor: function (array) {
+                var colorArr = array;
+                var string = "";
+                for (var i = 0; i < array.length; i++) {
+                    string += "" + array[i];
+                    if (i < array.length - 1) {
+                        string += ",";
+                    }
+                }                        
+                return string;
+            },
+            //# task 6 - Write a JavaScript program which accept a number as input and insert dashes (-) between each two even numbers.
+            task6: function (str) {                        
+                var stringArr = str;
+                var newString = "";
+                var k = -1;
+                for (var i = 0; i < str.length; i++) {
+                    if (i != k ) {
+                    newString += str[i];
+                    }
+                    if ((str[i] == 0 || str[i] % 2 == 0) && (str[i + 1] == 0 || str[i + 1] % 2 == 0)) {
+                    newString += "-" + str[i + 1];
+                    k = i + 1;
+                    }
+                }
+                return newString;
+            },
+            //# task 7 -  Write a JavaScript program to sort the items of an array.
+
+            sortMinMax: function (array) {                        
+                var arr = array;
+                var n = arr.length;
+                for (var i = 0; i < n-1; i++){ 
+                    for (var j = 0; j < n-1-i; j++){ 
+                        if (arr[j+1] < arr[j]){ 
+                            var t = arr[j+1]; 
+                            arr[j+1] = arr[j]; 
+                            arr[j] = t; 
+                        }
+                    }
+                }   
+                return arr; 
+            },
+            //# task 8 - Write a JavaScript program to find the most frequent item of an array.
+
+            task8: function (array) {
+                var sum = 0;                    
+                var countArr = {}, arr = [];
+                var arrString = "";
+                for (var i = 0; i < array.length; i++) {
+                    arrString += array[i];
+                }                        
+                function countChar(str, a) {
+                    var sum = 0;
+                    for (var i = 0; i < str.length; i++) {
+                        if (str.charAt(i) == a) {
+                            sum++;
+                        }
+                    }
+                    return sum;
+                }
+                for (var i = 0; i < arrString.length; i++) {
+                    countArr['Symbol ' + arrString.charAt(i)] = countChar(arrString, arrString.charAt(i));
+                    var a = arrString.charAt(i);
+                    var b = countChar(arrString, arrString.charAt(i));
+                    arr.push({symbol:a, count:b});
+                }
+                var max = 0, index = 0; 
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].count > max) {
+                        max = arr[i].count;
+                        index = i;
+                    }
+                }
+                console.log(arr[index].symbol + " - " + arr[index].count);
+            },
+            // # task 9 - Write a JavaScript program which accept a string as input and swap the case of each character.
+            task9: function (a){
+                var defaultString = "The Quick Brown Fox";
+                var newString = "";
+                for (var i = 0; i < defaultString.length; i++) {
+                    if (defaultString[i].charCodeAt() >= 65 && defaultString[i].charCodeAt() <= 90) {
+                        newString += String.fromCharCode(defaultString[i].charCodeAt() + 32);
+                    } else if (defaultString[i].charCodeAt() >= 97 && defaultString[i].charCodeAt() <= 122){
+                        newString += String.fromCharCode(defaultString[i].charCodeAt() - 32);
+                    } else {
+                        newString += defaultString[i];
+                    }
+                }
+                return newString;
+                console.log("Result of executing function: " + newString);
+                console.log("Testing results:");                        
+            },
+            testTask9: function (){
+                    var necessaryLine = 'tHE qUICK bROWN fOX';                            
+                    console.log("Default string: 'The Quick Brown Fox'");                            
+                    var result = myTasks.task9();
+                    console.log("Result after function: " + result);
+                    console.log("Need to be - 'tHE qUICK bROWN fOX'");                            
+                    if (necessaryLine == result) {
+                        console.log("Strings match");
+                    } else {
+                        console.log("Strings do not match");
+                    }
+            },
+            // # task 10 -  Write a JavaScript program which prints the elements of the following array.
+
+            task10: function (){
+                var a = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
+                console.log(a);
+                for (var i = 0; i < a.length; i++) {
+                    console.log("row " + i);
+                    for (var j = 0; j < 4; j++) {
+                        console.log(a[i][j]);
+                    }
+                }
+            },
+            // # task 11 - Write a JavaScript program to find the sum of squares of a numeric vector.
+
+            task11: function (ax, ay){
+                return Math.sqrt(ax * ax + ay * ay);
+            },
+            // # task 12 - Write a JavaScript program to compute the sum and product of an array of integers.
+
+            task12: function (arr){
+                var sum = 0;
+                var set = 1;
+                for (var i = 0; i < arr.length; i++) {
+                    sum += arr[i];
+                    set = set * arr[i];
+                }
+                return sum, set;
+            },
+            // # task 13 - Write a JavaScript program to add items in an blank array and display the items.
+            task13: function (element){
+                var arr = [];
+                arr.push(element);
+                console.log(arr);
+            },
+            // # task 14 - Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity).
+            task14: function (arr){
+                var newArr = [];                
+                for(i = 0; i < arr.length; i++) {
+                    for(k = 0; k < arr.length; k++) {
+                        if(k != i) {
+                            if(arr[i] == arr[k]) {
+                                arr[k] = '';
+                            }
+                        }
+                    }
+                }
+                for(i = 0;i < arr.length; i++) {
+                    if(arr[i] == '') {
+                        continue;
+                    }
+                    else {
+                        newArr.push(arr[i]);   
+                    }
+                }
+                console.log(newArr);
+            },
+            // # task 17 - Write a JavaScript program to shuffle an array
+            task17: function (arr){                
+                for (var i = arr.length - 1; i > 0; i--) {
+                    var num = Math.floor(Math.random() * (i + 1));
+                    var d = arr[num];
+                    arr[num] = arr[i];
+                    arr[i] = d;
+                }
+                return arr;
+            },
+            // # task 18 - Write a JavaScript program to perform a binary search.
+            binary_Search: function (arr, n){                
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] == n){
+                        return i;
+                    }
+                }
+            },
+            // # task 19 - There are two arrays with individual values, write a JavaScript program to compute the sum of each individual index value from the given arrays.
+            task19: function (arr1, arr2){
+                var len = 0;
+                var newArr = [];
+                if (arr1.length > arr2.length) {
+                    len = arr1.length;
+                } else {
+                    len = arr2.length;
+                }
+                for (var i = 0; i < len; i++) {
+                    
+                }
+                
+            }
+        }
+    }) ();
+</script>    
+</body>
+</html>
