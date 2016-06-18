@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title test
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+        link(rel='stylesheet', href='css/main.css')
+    body
+        script
+            include ../../mainCode.js
+        h2 Search by student name
+        p Enter name:
+        input(type="text" id="studentName")
+        br
+        a(class='clickFN', href='#') Show result
+        div(class='foundText')
+            table(class="foundTable")
+        hr
+        h2 List of students
+        a(class='click', href='#') Show result
+        div(class='foundText')
+            table(class="foundStudentsTable")
+        hr
+        h2 Summary statistic
+        a(class='clickS', href='#') Show all
+
+        div(class='foundText')
+            div(class='groupStatistic')
+        hr
+        a(href="/post") POST request
