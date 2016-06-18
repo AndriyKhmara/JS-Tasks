@@ -1,0 +1,30 @@
+td {
+	border: 1px solid black;
+	padding: 5px;
+}
+a {
+	text-decoration: none;
+}
+.center {
+	text-align: center;
+}
+.lineText {
+	display: block;
+	cursor: pointer;
+	padding: 8px;	
+}
+.lineText p {
+	cursor: pointer;		
+	font-size: 1.3em;	
+	text-align: center;
+}
+.foundText {
+	text-align: center;
+}
+.foundText table{
+	margin: auto;
+}
+.row {
+	margin: auto;
+}
+
